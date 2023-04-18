@@ -390,6 +390,8 @@ def main():
                 log.info(" Class ID | Confidence | XMIN | YMIN | XMAX | YMAX | COLOR ")
 
             origin_im_size = frame.shape[:-1]
+            
+            # ? Bounding box implementation code.
             for obj in objects:
                 # Validation bbox of detected object
                 obj['xmax'] = min(obj['xmax'], origin_im_size[1])
@@ -401,7 +403,6 @@ def main():
                          min(obj['class_id'] * 5, 255))
                 det_label = labels_map[obj['class_id']] if labels_map and len(labels_map) >= obj['class_id'] else \
                     str(obj['class_id'])
-
                 if args.raw_output_message:
                     log.info(
                         "{:^9} | {:10f} | {:4} | {:4} | {:4} | {:4} | {} ".format(det_label, obj['confidence'],
